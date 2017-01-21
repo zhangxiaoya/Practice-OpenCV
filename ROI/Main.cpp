@@ -18,6 +18,8 @@ int main()
 	imshow("ROI", roi);
 	waitKey(0);
 
+
+	// first method
 	Mat grayImg = Mat(300, 400, CV_8U);
 	for (int i = 0; i < grayImg.rows;++i)
 	{
@@ -42,6 +44,7 @@ int main()
 	imshow("RGB image", rgbImg);
 	waitKey(0);
 
+	// second method
 	Mat grayImg2 = Mat(300, 400, CV_8U);
 	MatIterator_<uchar> grayIt, grayEnd;
 	for (grayIt = grayImg2.begin<uchar>(), grayEnd = grayImg2.end<uchar>(); grayIt != grayEnd; ++grayIt)
@@ -59,6 +62,32 @@ int main()
 		(*rgbIt)[2] = rand() % 255;
 	}
 	imshow("RGB Image 2", rgbImge2);
+	waitKey();
+
+	// third method
+	Mat grayImg3 = Mat(300, 400, CV_8U);
+	for (int i = 0; i < grayImg3.rows;++i)
+	{
+		uchar* p = grayImg3.ptr < uchar>(i);
+		for (int j = 0; j < grayImg3.cols;++j)
+		{
+			p[j] = (i + j) % 255;
+		}
+	}
+	imshow("Gray Image 3", grayImg3);
+	waitKey();
+	Mat rgbImg3 = Mat(300, 400, CV_8UC3);
+	for (int i = 0; i < rgbImg3.rows;++i)
+	{
+		Vec3b* p = rgbImg3.ptr<Vec3b>(i);
+		for (int j = 0; j < rgbImg3.cols;++j)
+		{
+			p[j][0] = (i + j) % 255;
+			p[j][1] = (i + j) % 255;
+			p[j][2] = 0;
+		}
+	}
+	imshow("RGB Image 3", rgbImg3);
 	waitKey();
 	return 0;
 }
