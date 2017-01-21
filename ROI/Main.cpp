@@ -89,5 +89,19 @@ int main()
 	}
 	imshow("RGB Image 3", rgbImg3);
 	waitKey();
+
+	// use step
+	Mat grayImg4 = Mat(300, 400, CV_8U, Scalar(0));
+	for (int i = 0; i < grayImg4.rows;++i)
+	{
+		for (int j = 0; j < grayImg4.cols;++j)
+		{
+			cout << (int)(*(grayImg4.data + grayImg4.step[0] * i + grayImg4.step[1] * j)) <<" ==> "<<endl;
+			*(grayImg4.data + grayImg4.step[0] * i + grayImg4.step[1] * j) = 255;
+			cout << (int)(*(grayImg4.data + grayImg4.step[0] * i + grayImg4.step[1] * j)) << endl;
+		}
+	}
+	imshow("Gray Image 4", grayImg4);
+	waitKey();
 	return 0;
 }
