@@ -35,6 +35,31 @@ void SculptureFilter(const cv::Mat sourceImage, cv::Mat resultImage, int flag = 
 		}
 	}
 }
+
+void ZoomFilter(const cv::Mat sourceImage, cv::Mat resultImage, int flag = 0)
+{
+	cv::Point center(sourceImage.cols / 2, sourceImage.rows / 2);
+	sourceImage.copyTo(resultImage);
+
+	int R = sqrt(sourceImage.cols* sourceImage.cols + sourceImage.rows * sourceImage.rows) / 2;
+	for (int i = 0; i < resultImage.rows;++i)
+	{
+		uchar* curRow = resultImage.ptr<uchar>(i);
+		for (int j = 0; j < resultImage.cols;++j)
+		{
+			int dis = cv::norm(cv::Point(j, i) - center);
+			if(dis < R)
+			{
+				int newI = (i - center.y) * dis / R + center.y;
+				int newJ = (j - center.x) * dis / R + center.x;
+
+				curRow[3 * j + 0] = sourceImage.at<uchar>(newI, newJ * 3 + 0);
+				curRow[3 * j + 1] = sourceImage.at<uchar>(newI, newJ * 3 + 1);
+				curRow[3 * j + 2] = sourceImage.at<uchar>(newI, newJ * 3 + 2);
+			}
+		}
+	}
+}
 int main()
 {
 	cv::Mat sourceImage = cv::imread("lena.png");
@@ -53,6 +78,11 @@ int main()
 	cv::imshow("Filter Image", sculptureResultImageWithThreeDegree);
 	cv::imshow("Filter Image More", sculptureResultImageWithThreeDegreeMore);
 
+	cv::Mat zoomResultImage(sourceImage.size(), CV_8UC3);
+
+	ZoomFilter(sourceImage, zoomResultImage);
+
+	cv::imshow("Zoom Filter Image", zoomResultImage);
 	cv::waitKey();
 	return 0;
 }
