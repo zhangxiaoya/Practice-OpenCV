@@ -123,6 +123,22 @@ void FrostedGlassFilter(const cv::Mat& sourceImage,  cv::Mat& resultImage)
 	}
 }
 
+void NagetiveFilter(const cv::Mat& sourceImage, cv::Mat& resultImage)
+{
+	for (int i = 0; i < sourceImage.rows;++i)
+	{
+		const uchar* pSrc = sourceImage.ptr<uchar>(i);
+		uchar* pCur = resultImage.ptr<uchar>(i);
+
+		for (int j = 0; j < sourceImage.cols;++j)
+		{
+			pCur[j * 3 + 0] = 255 - pSrc[j * 3 + 0];
+			pCur[j * 3 + 1] = 255 - pSrc[j * 3 + 1];
+			pCur[j * 3 + 2] = 255 - pSrc[j * 3 + 2];
+		}
+	}
+}
+
 int main()
 {
 	cv::Mat sourceImage = cv::imread("lena.png");
@@ -164,6 +180,12 @@ int main()
 	FrostedGlassFilter(sourceImage, frostedGlassResultImage);
 
 	cv::imshow("Frosted Glass Filter Image", frostedGlassResultImage);
+
+	cv::Mat negativeResultImage(sourceImage.size(), CV_8UC3);
+
+	NagetiveFilter(sourceImage, negativeResultImage);
+
+	cv::imshow("Frosted Glass Filter Image", negativeResultImage);
 	cv::waitKey();
 	return 0;
 }
