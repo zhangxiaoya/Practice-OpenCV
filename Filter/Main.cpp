@@ -60,6 +60,26 @@ void ZoomFilter(const cv::Mat sourceImage, cv::Mat resultImage, int flag = 0)
 		}
 	}
 }
+
+void ColorMapFilter(const cv::Mat& sourceImage, const cv::Mat& resultImage)
+{
+	int width = sourceImage.cols;
+	int height = sourceImage.rows;
+
+	cv::Mat gray;
+	cv::Mat imageColors[12];
+
+	cv::cvtColor(sourceImage,gray, CV_BGR2GRAY);
+	for (int i = 0; i < 12;++i)
+	{
+		cv::applyColorMap(gray, imageColors[i], i);
+		int row = i / 4;
+		int col = i % 4;
+		cv::Mat currntROI = resultImage(cv::Rect(col * width, row*height, width, height));
+		cv::resize(imageColors[i], currntROI, currntROI.size());
+	}
+}
+
 int main()
 {
 	cv::Mat sourceImage = cv::imread("lena.png");
@@ -67,7 +87,7 @@ int main()
 	{
 		cout << "Error: can not read file!";
 	}
-	cv::imshow("Source Image", sourceImage);
+	imshow("Source Image", sourceImage);
 
 	cv::Mat sculptureResultImageWithThreeDegree(sourceImage.size(), CV_8UC3);
 	cv::Mat sculptureResultImageWithThreeDegreeMore(sourceImage.size(), CV_8UC3);
@@ -75,14 +95,20 @@ int main()
 	SculptureFilter(sourceImage, sculptureResultImageWithThreeDegree);
 	SculptureFilter(sourceImage, sculptureResultImageWithThreeDegreeMore,1);
 
-	cv::imshow("Filter Image", sculptureResultImageWithThreeDegree);
-	cv::imshow("Filter Image More", sculptureResultImageWithThreeDegreeMore);
+	imshow("Filter Image", sculptureResultImageWithThreeDegree);
+	imshow("Filter Image More", sculptureResultImageWithThreeDegreeMore);
 
 	cv::Mat zoomResultImage(sourceImage.size(), CV_8UC3);
 
 	ZoomFilter(sourceImage, zoomResultImage);
 
-	cv::imshow("Zoom Filter Image", zoomResultImage);
+	imshow("Zoom Filter Image", zoomResultImage);
+
+	cv::Mat colorMapResultImage(sourceImage.rows * 3, sourceImage.cols*4, CV_8UC3);
+
+	ColorMapFilter(sourceImage, colorMapResultImage);
+
+	imshow("Zoom Filter Image", colorMapResultImage);
 	cv::waitKey();
 	return 0;
 }
