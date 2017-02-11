@@ -80,6 +80,30 @@ void ColorMapFilter(const cv::Mat& sourceImage, const cv::Mat& resultImage)
 	}
 }
 
+void SketchFilter(const cv::Mat& sourceImage, cv::Mat& resultImage)
+{
+	cv::Mat grayImg;
+	cv::Mat inverseColorImg;
+
+	cvtColor(sourceImage, grayImg, CV_BGR2GRAY);
+
+	cv::addWeighted(grayImg, -1, NULL, 0, 255, inverseColorImg);
+	
+	cv::GaussianBlur(inverseColorImg, inverseColorImg, cv::Size(11, 11), 0);
+
+	for (int i = 0; i < grayImg.rows;++i)
+	{
+		uchar* pGray = grayImg.ptr<uchar>(i);
+		uchar* pInverse = inverseColorImg.ptr<uchar>(i);
+		uchar* pCurrent = resultImage.ptr<uchar>(i);
+
+		for (int j = 0; j < grayImg.cols;++j)
+		{
+			pCurrent[j] = static_cast<uchar>(cv::min((pGray[j]) + (pGray[j] * pInverse[j]) / (255 - pInverse[j]), 255));
+		}
+	}
+}
+
 int main()
 {
 	cv::Mat sourceImage = cv::imread("lena.png");
@@ -109,6 +133,12 @@ int main()
 	ColorMapFilter(sourceImage, colorMapResultImage);
 
 	imshow("Zoom Filter Image", colorMapResultImage);
+
+	cv::Mat sketckResultImage(sourceImage.size(), CV_8U);
+
+	SketchFilter(sourceImage,sketckResultImage);
+
+	cv::imshow("Sketck Image", sketckResultImage);
 	cv::waitKey();
 	return 0;
 }
