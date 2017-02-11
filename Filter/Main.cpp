@@ -104,6 +104,25 @@ void SketchFilter(const cv::Mat& sourceImage, cv::Mat& resultImage)
 	}
 }
 
+void FrostedGlassFilter(const cv::Mat& sourceImage,  cv::Mat& resultImage)
+{
+	cv::RNG rng;
+	for (int i = 1; i < sourceImage.rows-1;++i)
+	{
+		uchar* const pCur = resultImage.ptr<uchar>(i);
+
+		for (int j = 1; j < sourceImage.cols-1;++j)
+		{
+			int redomIndex = rng.uniform(0, 9);
+			int srcRow = (i - 1) + redomIndex / 3;
+			int srcCol = (j - 1) + redomIndex % 3;
+			pCur[3 * j + 0] = sourceImage.at<uchar>(srcRow, srcCol * 3 + 0);
+			pCur[3 * j + 1] = sourceImage.at<uchar>(srcRow, srcCol * 3 + 1);
+			pCur[3 * j + 2] = sourceImage.at<uchar>(srcRow, srcCol * 3 + 2);
+		}
+	}
+}
+
 int main()
 {
 	cv::Mat sourceImage = cv::imread("lena.png");
@@ -139,6 +158,12 @@ int main()
 	SketchFilter(sourceImage,sketckResultImage);
 
 	cv::imshow("Sketck Image", sketckResultImage);
+
+	cv::Mat frostedGlassResultImage(sourceImage.size(), CV_8UC3);
+
+	FrostedGlassFilter(sourceImage, frostedGlassResultImage);
+
+	cv::imshow("Frosted Glass Filter Image", frostedGlassResultImage);
 	cv::waitKey();
 	return 0;
 }
