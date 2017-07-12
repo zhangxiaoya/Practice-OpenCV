@@ -12,7 +12,7 @@ void GenerateGrayImageUseAtOperator(cv::Mat& grayImg)
 	{
 		for (auto j = 0; j < grayImg.cols; ++j)
 		{
-			grayImg.at<uchar>(i, j) = (i + j) % 255;
+			grayImg.at<uchar>(i, j) = rand() % 255;
 		}
 	}
 }
@@ -23,10 +23,19 @@ void GenerateRGBImageUseAtOperator(cv::Mat& rgbImg)
 	{
 		for (auto j = 0; j < rgbImg.cols; ++j)
 		{
-			rgbImg.at<cv::Vec3b>(i, j)[0] = i % 255;
-			rgbImg.at<cv::Vec3b>(i, j)[1] = j % 255;
-			rgbImg.at<cv::Vec3b>(i, j)[2] = 0;
+			rgbImg.at<cv::Vec3b>(i, j)[0] = rand() % 255;;
+			rgbImg.at<cv::Vec3b>(i, j)[1] = rand() % 255;;
+			rgbImg.at<cv::Vec3b>(i, j)[2] = rand() % 255;;
 		}
+	}
+}
+
+void GenerateGrayImageUseMatIterator(cv::Mat& grayImg)
+{
+	cv::MatIterator_<uchar> grayIt, grayEnd;
+	for (grayIt = grayImg.begin<uchar>() , grayEnd = grayImg.end<uchar>(); grayIt != grayEnd; ++grayIt)
+	{
+		*grayIt = rand() % 255;
 	}
 }
 
@@ -67,13 +76,10 @@ int main()
 
 	// second method
 	auto grayImg2 = cv::Mat(300, 400, CV_8U);
-	cv::MatIterator_<uchar> grayIt, grayEnd;
-	for (grayIt = grayImg2.begin<uchar>() , grayEnd = grayImg2.end<uchar>(); grayIt != grayEnd; ++grayIt)
-	{
-		*grayIt = rand() % 255;
-	}
+	CheckPerf(GenerateGrayImageUseMatIterator(grayImg2), "GenerateGrayImageUseMatIterator");
 	imshow("Gray Image 2", grayImg2);
-	cv::waitKey();
+	cv::waitKey(0);
+
 	auto rgbImge2 = cv::Mat(300, 400, CV_8UC3);
 	cv::MatIterator_<cv::Vec3b> rgbIt, rgbEnd;
 	for (rgbIt = rgbImge2.begin<cv::Vec3b>() , rgbEnd = rgbImge2.end<cv::Vec3b>(); rgbIt != rgbEnd; ++rgbIt)
