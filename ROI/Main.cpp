@@ -5,6 +5,7 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include "Utils/PerformanceUtil.hpp"
+#include <highgui.hpp>
 
 void GenerateGrayImageUseAtOperator(cv::Mat& grayImg)
 {
@@ -76,6 +77,14 @@ void GenerateRGBImageUsePtr(cv::Mat& rgbImg)
 	}
 }
 
+void SnapShow(const cv::Mat& img, const char* winname)
+{
+	cv::namedWindow(winname);
+	imshow(winname, img);
+	cv::waitKey(0);
+	cv::destroyWindow(winname);
+}
+
 int main()
 {
 	auto img = cv::imread(".\\lena.png");
@@ -86,19 +95,18 @@ int main()
 		return -1;
 	}
 
-	imshow("Original image with rectangle", img);
-	cv::waitKey(0);
+	SnapShow(img, "Original image");
 
 	cv::Rect rect(180, 200, 200, 200);
 
 	auto imgClone = img.clone();
 	rectangle(imgClone, rect, cv::Scalar(0, 255, 0), 2);
-	imshow("Original image with rectangle", imgClone);
-	cv::waitKey(0);
+
+	SnapShow(imgClone, "Original image with rectangle");
 
 	auto roi = cv::Mat(img, rect);
-	imshow("ROI", roi);
-	cv::waitKey(0);
+
+	SnapShow(roi, "ROI");
 
 	auto height = img.rows;
 	auto width = img.cols;
@@ -106,35 +114,35 @@ int main()
 	// visit image the first methd -- use at operator
 	auto grayImg = cv::Mat(height, width, CV_8U);
 	CheckPerf(GenerateGrayImageUseAtOperator(grayImg), "GenerateGrayImageUseAtOperator");
-	imshow("grayImg", grayImg);
-	cv::waitKey(0);
+
+	SnapShow(grayImg, "grayImg");
 
 	auto rgbImg = cv::Mat(height, width, CV_8UC3);
 	CheckPerf(GenerateRGBImageUseAtOperator(rgbImg), "GenerateRGBImageUseAtOperator");
-	imshow("RGB image", rgbImg);
-	cv::waitKey(0);
+
+	SnapShow(rgbImg, "RGB image");
 
 	// visit iamge the second method -- use mat iterator
 	auto grayImg2 = cv::Mat(height, width, CV_8U);
 	CheckPerf(GenerateGrayImageUseMatIterator(grayImg2), "GenerateGrayImageUseMatIterator");
-	imshow("Gray Image 2", grayImg2);
-	cv::waitKey(0);
+
+	SnapShow(grayImg2, "Gray Image 2");
 
 	auto rgbImge2 = cv::Mat(height, width, CV_8UC3);
 	CheckPerf(GenerateRGBImageUseMatIterator(rgbImge2), "GenerateRGBImageUseMatIterator");
-	imshow("RGB Image 2", rgbImge2);
-	cv::waitKey();
+
+	SnapShow(rgbImge2, "RGB Image 2");
 
 	// visit iamge the third method -- use ptr point
 	auto grayImg3 = cv::Mat(height, width, CV_8U);
 	CheckPerf(GenerateGrayImageUsePtr(grayImg3), "GenerateGrayImageUsePtr");
-	imshow("Gray Image 3", grayImg3);
-	cv::waitKey();
+
+	SnapShow(grayImg3, "Gray Image 3");
 
 	auto rgbImg3 = cv::Mat(height, width, CV_8UC3);
 	CheckPerf(GenerateRGBImageUsePtr(rgbImg3), "GenerateRGBImageUsePtr");
-	imshow("RGB Image 3", rgbImg3);
-	cv::waitKey();
+
+	SnapShow(rgbImg3, "RGB Image 3");
 
 	// use step
 	auto grayImg4 = cv::Mat(height, width, CV_8U, cv::Scalar(0));
@@ -142,12 +150,10 @@ int main()
 	{
 		for (auto j = 0; j < grayImg4.cols; ++j)
 		{
-			std::cout << static_cast<int>(*(grayImg4.data + grayImg4.step[0] * i + grayImg4.step[1] * j)) << " ==> " << std::endl;
-			*(grayImg4.data + grayImg4.step[0] * i + grayImg4.step[1] * j) = 255;
-			std::cout << static_cast<int>(*(grayImg4.data + grayImg4.step[0] * i + grayImg4.step[1] * j)) << std::endl;
+			*(grayImg4.data + grayImg4.step[0] * i + grayImg4.step[1] * j) = (i + j) % 255;
 		}
 	}
-	imshow("Gray Image 4", grayImg4);
-	cv::waitKey();
+	SnapShow(grayImg4, "Gray Image 4");
+
 	return 0;
 }
