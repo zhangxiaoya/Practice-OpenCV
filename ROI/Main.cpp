@@ -1,7 +1,9 @@
 ﻿#pragma once
 
 #include <iostream>
-#include <opencv2/opencv.hpp>
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
 #include "Utils/PerformanceUtil.hpp"
 
 void GenerateGrayImageUseAtOperator(cv::Mat& grayImg)
@@ -11,6 +13,19 @@ void GenerateGrayImageUseAtOperator(cv::Mat& grayImg)
 		for (auto j = 0; j < grayImg.cols; ++j)
 		{
 			grayImg.at<uchar>(i, j) = (i + j) % 255;
+		}
+	}
+}
+
+void GenerateRGBImageUseAtOperator(cv::Mat& rgbImg)
+{
+	for (auto i = 0; i < rgbImg.rows; ++i)
+	{
+		for (auto j = 0; j < rgbImg.cols; ++j)
+		{
+			rgbImg.at<cv::Vec3b>(i, j)[0] = i % 255;
+			rgbImg.at<cv::Vec3b>(i, j)[1] = j % 255;
+			rgbImg.at<cv::Vec3b>(i, j)[2] = 0;
 		}
 	}
 }
@@ -46,15 +61,7 @@ int main()
 	cv::waitKey(0);
 
 	auto rgbImg = cv::Mat(300, 400, CV_8UC3);
-	for (auto i = 0; i < rgbImg.rows; ++i)
-	{
-		for (auto j = 0; j < rgbImg.cols; ++j)
-		{
-			rgbImg.at<cv::Vec3b>(i, j)[0] = i % 255;
-			rgbImg.at<cv::Vec3b>(i, j)[1] = j % 255;
-			rgbImg.at<cv::Vec3b>(i, j)[2] = 0;
-		}
-	}
+	CheckPerf(GenerateRGBImageUseAtOperator(rgbImg), "GenerateRGBImageUseAtOperator");
 	imshow("RGB image", rgbImg);
 	cv::waitKey(0);
 
