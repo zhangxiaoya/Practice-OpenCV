@@ -12,7 +12,7 @@ void GenerateGrayImageUseAtOperator(cv::Mat& grayImg)
 	{
 		for (auto j = 0; j < grayImg.cols; ++j)
 		{
-			grayImg.at<uchar>(i, j) = rand() % 255;
+			grayImg.at<uchar>(i, j) = (i + j) % 255;
 		}
 	}
 }
@@ -23,9 +23,9 @@ void GenerateRGBImageUseAtOperator(cv::Mat& rgbImg)
 	{
 		for (auto j = 0; j < rgbImg.cols; ++j)
 		{
-			rgbImg.at<cv::Vec3b>(i, j)[0] = rand() % 255;;
-			rgbImg.at<cv::Vec3b>(i, j)[1] = rand() % 255;;
-			rgbImg.at<cv::Vec3b>(i, j)[2] = rand() % 255;;
+			rgbImg.at<cv::Vec3b>(i, j)[0] = i % 255;;
+			rgbImg.at<cv::Vec3b>(i, j)[1] = j % 255;;
+			rgbImg.at<cv::Vec3b>(i, j)[2] = (i + j) % 255;;
 		}
 	}
 }
@@ -47,6 +47,18 @@ void GenerateRGBImageUseMatIterator(cv::Mat& rgbImge)
 		(*rgbIt)[0] = rand() % 255;
 		(*rgbIt)[1] = rand() % 255;
 		(*rgbIt)[2] = rand() % 255;
+	}
+}
+
+void GenerateGrayImageUsePtr(cv::Mat& grayImg)
+{
+	for (auto i = 0; i < grayImg.rows; ++i)
+	{
+		auto p = grayImg.ptr<uchar>(i);
+		for (auto j = 0; j < grayImg.cols; ++j)
+		{
+			p[j] = (i + j) % 255;
+		}
 	}
 }
 
@@ -96,18 +108,12 @@ int main()
 	imshow("RGB Image 2", rgbImge2);
 	cv::waitKey();
 
-	// third method
+	// visit iamge the third method -- use ptr point
 	auto grayImg3 = cv::Mat(300, 400, CV_8U);
-	for (auto i = 0; i < grayImg3.rows; ++i)
-	{
-		auto p = grayImg3.ptr<uchar>(i);
-		for (auto j = 0; j < grayImg3.cols; ++j)
-		{
-			p[j] = (i + j) % 255;
-		}
-	}
+	CheckPerf(GenerateGrayImageUsePtr(grayImg3), "GenerateGrayImageUsePtr");
 	imshow("Gray Image 3", grayImg3);
 	cv::waitKey();
+
 	auto rgbImg3 = cv::Mat(300, 400, CV_8UC3);
 	for (auto i = 0; i < rgbImg3.rows; ++i)
 	{
