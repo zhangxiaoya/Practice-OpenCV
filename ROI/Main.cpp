@@ -4,6 +4,17 @@
 #include <opencv2/opencv.hpp>
 #include "Utils/PerformanceUtil.hpp"
 
+void GenerateGrayImageUseAtOperator(cv::Mat& grayImg)
+{
+	for (auto i = 0; i < grayImg.rows; ++i)
+	{
+		for (auto j = 0; j < grayImg.cols; ++j)
+		{
+			grayImg.at<uchar>(i, j) = (i + j) % 255;
+		}
+	}
+}
+
 int main()
 {
 	auto img = cv::imread(".\\lena.png");
@@ -28,15 +39,9 @@ int main()
 	imshow("ROI", roi);
 	cv::waitKey(0);
 
-	// first method
+	// visit image the first methd -- use at operator
 	auto grayImg = cv::Mat(300, 400, CV_8U);
-	for (auto i = 0; i < grayImg.rows; ++i)
-	{
-		for (auto j = 0; j < grayImg.cols; ++j)
-		{
-			grayImg.at<uchar>(i, j) = (i + j) % 255;
-		}
-	}
+	CheckPerf(GenerateGrayImageUseAtOperator(grayImg));
 	imshow("grayImg", grayImg);
 	cv::waitKey(0);
 
