@@ -5,7 +5,6 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include "Utils/PerformanceUtil.hpp"
-#include <highgui.hpp>
 
 void GenerateGrayImageUseAtOperator(cv::Mat& grayImg)
 {
@@ -77,6 +76,17 @@ void GenerateRGBImageUsePtr(cv::Mat& rgbImg)
 	}
 }
 
+void GenerateGrayImageUseStep(cv::Mat& grayImg)
+{
+	for (auto i = 0; i < grayImg.rows; ++i)
+	{
+		for (auto j = 0; j < grayImg.cols; ++j)
+		{
+			*(grayImg.data + grayImg.step[0] * i + grayImg.step[1] * j) = (i + j) % 255;
+		}
+	}
+}
+
 void SnapShow(const cv::Mat& img, const char* winname)
 {
 	cv::namedWindow(winname);
@@ -144,15 +154,9 @@ int main()
 
 	SnapShow(rgbImg3, "RGB Image 3");
 
-	// use step
+	// visit image the forth method -- use step
 	auto grayImg4 = cv::Mat(height, width, CV_8U, cv::Scalar(0));
-	for (auto i = 0; i < grayImg4.rows; ++i)
-	{
-		for (auto j = 0; j < grayImg4.cols; ++j)
-		{
-			*(grayImg4.data + grayImg4.step[0] * i + grayImg4.step[1] * j) = (i + j) % 255;
-		}
-	}
+	CheckPerf(GenerateGrayImageUseStep(grayImg4), "GenerateGrayImageUseStep");
 	SnapShow(grayImg4, "Gray Image 4");
 
 	return 0;
