@@ -6,11 +6,24 @@
 int main()
 {
 	auto img = cv::imread(".\\lena.png");
+	if (img.empty())
+	{
+		std::cout << "Read image file failed!" << std::endl;
+		system("Pause");
+		return -1;
+	}
+
+	imshow("Original image with rectangle", img);
+	cv::waitKey(0);
+
 	cv::Rect rect(180, 200, 200, 200);
-	auto roi = cv::Mat(img, rect);
+
 	auto imgClone = img.clone();
 	rectangle(imgClone, rect, cv::Scalar(0, 255, 0), 2);
 	imshow("Original image with rectangle", imgClone);
+	cv::waitKey(0);
+
+	auto roi = cv::Mat(img, rect);
 	imshow("ROI", roi);
 	cv::waitKey(0);
 
