@@ -41,7 +41,7 @@ int main()
 
 	// visit image the first methd -- use at operator
 	auto grayImg = cv::Mat(300, 400, CV_8U);
-	CheckPerf(GenerateGrayImageUseAtOperator(grayImg));
+	CheckPerf(GenerateGrayImageUseAtOperator(grayImg), "GenerateGrayImageUseAtOperator");
 	imshow("grayImg", grayImg);
 	cv::waitKey(0);
 
