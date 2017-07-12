@@ -39,6 +39,17 @@ void GenerateGrayImageUseMatIterator(cv::Mat& grayImg)
 	}
 }
 
+void GenerateRGBImageUseMatIterator(cv::Mat& rgbImge)
+{
+	cv::MatIterator_<cv::Vec3b> rgbIt, rgbEnd;
+	for (rgbIt = rgbImge.begin<cv::Vec3b>() , rgbEnd = rgbImge.end<cv::Vec3b>(); rgbIt != rgbEnd; ++rgbIt)
+	{
+		(*rgbIt)[0] = rand() % 255;
+		(*rgbIt)[1] = rand() % 255;
+		(*rgbIt)[2] = rand() % 255;
+	}
+}
+
 int main()
 {
 	auto img = cv::imread(".\\lena.png");
@@ -74,20 +85,14 @@ int main()
 	imshow("RGB image", rgbImg);
 	cv::waitKey(0);
 
-	// second method
+	// visit iamge the second method -- use mat iterator
 	auto grayImg2 = cv::Mat(300, 400, CV_8U);
 	CheckPerf(GenerateGrayImageUseMatIterator(grayImg2), "GenerateGrayImageUseMatIterator");
 	imshow("Gray Image 2", grayImg2);
 	cv::waitKey(0);
 
 	auto rgbImge2 = cv::Mat(300, 400, CV_8UC3);
-	cv::MatIterator_<cv::Vec3b> rgbIt, rgbEnd;
-	for (rgbIt = rgbImge2.begin<cv::Vec3b>() , rgbEnd = rgbImge2.end<cv::Vec3b>(); rgbIt != rgbEnd; ++rgbIt)
-	{
-		(*rgbIt)[0] = rand() % 255;
-		(*rgbIt)[1] = rand() % 255;
-		(*rgbIt)[2] = rand() % 255;
-	}
+	CheckPerf(GenerateRGBImageUseMatIterator(rgbImge2), "GenerateRGBImageUseMatIterator");
 	imshow("RGB Image 2", rgbImge2);
 	cv::waitKey();
 
