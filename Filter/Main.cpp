@@ -140,6 +140,14 @@ void NagetiveFilter(const cv::Mat& sourceImage, cv::Mat& resultImage)
 	}
 }
 
+void SnapShow(const cv::Mat& img, const char* winname)
+{
+	cv::namedWindow(winname);
+	imshow(winname, img);
+	cv::waitKey(0);
+	cv::destroyWindow(winname);
+}
+
 int main()
 {
 	auto sourceImage = cv::imread(".\\lena.png");
@@ -149,46 +157,44 @@ int main()
 		system("Pause");
 		return -1;
 	}
-	imshow("Source Image", sourceImage);
+	
+	SnapShow(sourceImage, "Source Image");
 
 	cv::Mat sculptureResultImageWithThreeDegree(sourceImage.size(), CV_8UC3);
-	cv::Mat sculptureResultImageWithThreeDegreeMore(sourceImage.size(), CV_8UC3);
-
 	SculptureFilter(sourceImage, sculptureResultImageWithThreeDegree);
+
+	SnapShow(sculptureResultImageWithThreeDegree, "Filter Image");
+
+	cv::Mat sculptureResultImageWithThreeDegreeMore(sourceImage.size(), CV_8UC3);
 	SculptureFilter(sourceImage, sculptureResultImageWithThreeDegreeMore, 1);
 
-	imshow("Filter Image", sculptureResultImageWithThreeDegree);
-	imshow("Filter Image More", sculptureResultImageWithThreeDegreeMore);
+	SnapShow(sculptureResultImageWithThreeDegreeMore, "Filter Image More");
 
 	cv::Mat zoomResultImage(sourceImage.size(), CV_8UC3);
-
 	ZoomFilter(sourceImage, zoomResultImage);
 
-	imshow("Zoom Filter Image", zoomResultImage);
+	SnapShow(zoomResultImage, "Zoom Filter Image");
 
 	cv::Mat colorMapResultImage(sourceImage.rows * 3, sourceImage.cols * 4, CV_8UC3);
-
 	ColorMapFilter(sourceImage, colorMapResultImage);
 
-	imshow("Zoom Filter Image", colorMapResultImage);
+	SnapShow(colorMapResultImage, "Zoom Filter Image");
 
 	cv::Mat sketckResultImage(sourceImage.size(), CV_8U);
-
 	SketchFilter(sourceImage, sketckResultImage);
 
-	imshow("Sketck Image", sketckResultImage);
+	SnapShow(sketckResultImage, "Sketck Image");
 
 	cv::Mat frostedGlassResultImage(sourceImage.size(), CV_8UC3);
-
 	FrostedGlassFilter(sourceImage, frostedGlassResultImage);
 
-	imshow("Frosted Glass Filter Image", frostedGlassResultImage);
+	SnapShow(frostedGlassResultImage, "Frosted Glass Filter Image");
 
 	cv::Mat negativeResultImage(sourceImage.size(), CV_8UC3);
-
 	NagetiveFilter(sourceImage, negativeResultImage);
 
-	imshow("Frosted Glass Filter Image", negativeResultImage);
-	cv::waitKey();
+	SnapShow(negativeResultImage, "Frosted Glass Filter Image");
+
+	system("Pause");
 	return 0;
 }
