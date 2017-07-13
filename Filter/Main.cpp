@@ -4,6 +4,7 @@
 #include <imgproc/imgproc.hpp>
 #include <contrib/contrib.hpp>
 
+#include "Utils/PerformanceUtil.hpp"
 void SculptureFilter(const cv::Mat sourceImage, cv::Mat resultImage, int flag = 0)
 {
 	auto res = 0;
@@ -100,7 +101,7 @@ void SketchFilter(const cv::Mat& sourceImage, cv::Mat& resultImage)
 
 		for (auto j = 0; j < grayImg.cols; ++j)
 		{
-			pCurrent[j] = static_cast<uchar>(cv::min((pGray[j]) + (pGray[j] * pInverse[j]) / (255 - pInverse[j]), 255));
+			pCurrent[j] = static_cast<uchar>(min((pGray[j]) + (pGray[j] * pInverse[j]) / (255 - pInverse[j]), 255));
 		}
 	}
 }
