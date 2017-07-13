@@ -162,37 +162,37 @@ int main()
 	SnapShow(sourceImage, "Source Image");
 
 	cv::Mat sculptureResultImageWithThreeDegree(sourceImage.size(), CV_8UC3);
-	SculptureFilter(sourceImage, sculptureResultImageWithThreeDegree);
+	CheckPerf(SculptureFilter(sourceImage, sculptureResultImageWithThreeDegree), "SculptureFilter");
 
 	SnapShow(sculptureResultImageWithThreeDegree, "Filter Image");
 
 	cv::Mat sculptureResultImageWithThreeDegreeMore(sourceImage.size(), CV_8UC3);
-	SculptureFilter(sourceImage, sculptureResultImageWithThreeDegreeMore, 1);
+	CheckPerf(SculptureFilter(sourceImage, sculptureResultImageWithThreeDegreeMore, 1), "SculptureFilter");
 
 	SnapShow(sculptureResultImageWithThreeDegreeMore, "Filter Image More");
 
 	cv::Mat zoomResultImage(sourceImage.size(), CV_8UC3);
-	ZoomFilter(sourceImage, zoomResultImage);
+	CheckPerf(ZoomFilter(sourceImage, zoomResultImage), "ZoomFilter");
 
 	SnapShow(zoomResultImage, "Zoom Filter Image");
 
 	cv::Mat colorMapResultImage(sourceImage.rows * 3, sourceImage.cols * 4, CV_8UC3);
-	ColorMapFilter(sourceImage, colorMapResultImage);
+	CheckPerf(ColorMapFilter(sourceImage, colorMapResultImage), "ColorMapFilter");
 
 	SnapShow(colorMapResultImage, "Zoom Filter Image");
 
 	cv::Mat sketckResultImage(sourceImage.size(), CV_8U);
-	SketchFilter(sourceImage, sketckResultImage);
+	CheckPerf(SketchFilter(sourceImage, sketckResultImage), "SketchFilter");
 
 	SnapShow(sketckResultImage, "Sketck Image");
 
 	cv::Mat frostedGlassResultImage(sourceImage.size(), CV_8UC3);
-	FrostedGlassFilter(sourceImage, frostedGlassResultImage);
+	CheckPerf(FrostedGlassFilter(sourceImage, frostedGlassResultImage), "FrostedGlassFilter");
 
 	SnapShow(frostedGlassResultImage, "Frosted Glass Filter Image");
 
 	cv::Mat negativeResultImage(sourceImage.size(), CV_8UC3);
-	NagetiveFilter(sourceImage, negativeResultImage);
+	CheckPerf(NagetiveFilter(sourceImage, negativeResultImage), "NagetiveFilter");
 
 	SnapShow(negativeResultImage, "Frosted Glass Filter Image");
 
