@@ -1,26 +1,29 @@
 ﻿#include <opencv2/opencv.hpp>
 #include <iostream>
+#include <iomanip>
 
-using namespace std;
-using namespace cv;
+const auto CameraId = 0;
 
 int main()
 {
-	VideoCapture cap(0);
-	if (!cap.isOpened())
+	cv::VideoCapture capture(CameraId);
+	if (!capture.isOpened())
 	{
-		cout << "Can not open camera" << endl;
+		std::cout << "Can Not Open Camera " << std::setw(2) << CameraId << std::endl;
+		system("Pause");
 		return -1;
 	}
-	Mat frame;
-	Mat edges;
-	bool isBreakByUser = false;
+
+	cv::Mat frame;
+	auto isBreakByUser = false;
 	while (!isBreakByUser)
 	{
-		cap >> frame;
+		capture >> frame;
 		imshow("Current Video", frame);
-		if (waitKey(30) >= 0)
+		if (cv::waitKey(30) >= 0)
 			isBreakByUser = true;
 	}
+
+	system("Pause");
 	return 0;
 }
