@@ -3,6 +3,7 @@
 #include <iostream>
 #include <ml/ml.hpp>
 #include <contrib/contrib.hpp>
+#include <highgui/highgui.hpp>
 
 int readFlippedInteger(FILE* fp)
 {
@@ -20,7 +21,6 @@ int main()
 	FILE* fp;
 	FILE* fp2;
 	fopen_s(&fp, "..\\data\\train-images.idx3-ubyte", "rb");
-
 	fopen_s(&fp2, "..\\data\\train-labels.idx1-ubyte", "rb");
 
 	if (!fp || !fp2)
@@ -41,12 +41,8 @@ int main()
 
 	cv::Mat trainingVectors(numImages, size, CV_32FC1);
 	cv::Mat trainingLabels(numImages, 1, CV_32FC1);
-	//CvMat *trainingVectors = cvCreateMat(numImages, size, CV_32FC1);
-	//CvMat *trainingLabels = cvCreateMat(numImages, 1, CV_32FC1);
 
 	auto temp = new uchar[size];
-	//unsigned char *temp = new unsigned char[size];
-
 	uchar tempClass = 0;
 
 	for (auto i = 0; i < numImages; i++)
@@ -60,18 +56,16 @@ int main()
 			trainingVectors.at<float>(i, k) = temp[k];
 			img.at<float>(k / numCols, k % numCols) = temp[k];
 		}
-		//		imshow("data", img);
-		//waitKey(2);
+		imshow("data", img);
+		cv::waitKey(100);
 	}
 
 	cv::KNearest knn(trainingVectors, trainingLabels);
 	printf("Maximum k: %d\n", knn.get_max_k());
 
-
 	fclose(fp);
 	fclose(fp2);
 	delete[] temp;
-
 
 	fopen_s(&fp, "..\\data\\t10k-images.idx3-ubyte", "rb");
 	fopen_s(&fp2, "..\\data\\t10k-labels.idx1-ubyte", "rb");
