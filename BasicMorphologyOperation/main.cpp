@@ -2,30 +2,14 @@
 #include <core/core.hpp>
 #include <imgproc/imgproc.hpp>
 #include <highgui/highgui.hpp>
+#include "Models/ErosionData.hpp"
+#include "Models/DilationData.hpp"
 
 auto const MaxElem = 2;
 auto const MaxKernelSize = 21;
 
-struct ErosionData
-{
-	ErosionData() : erosionElem(0), erosionSize(0)
-	{
-	}
-	cv::Mat srcImg;
-	int erosionElem;
-	int erosionSize;
-};
-
-struct DilationData
-{
-	DilationData() : dilationElem(0), dilationSize(0)
-	{
-	}
-
-	int dilationElem;
-	int dilationSize;
-	cv::Mat srcImg;
-};
+const auto ErosionWindowName = "Erosion Demo";
+const auto DilationWindowName = "Dilation Demo";
 
 void UpdateErosionView(int erosionType, ErosionData* const data)
 {
@@ -86,14 +70,6 @@ void Dilation(int, void* data)
 	UpdateDilationView(dilationType, dataPtr);
 }
 
-void SnapShow(const cv::Mat& img, const char* winname)
-{
-	cv::namedWindow(winname);
-	imshow(winname, img);
-	cv::waitKey(0);
-	cv::destroyWindow(winname);
-}
-
 int main(int argc, char* argv[])
 {
 	auto img = cv::imread("..\\data\\lena.png");
@@ -104,22 +80,28 @@ int main(int argc, char* argv[])
 		return -1;
 	}
 
-	cv::namedWindow("Erosion Demo", CV_WINDOW_AUTOSIZE);
-	cv::namedWindow("Dilation Demo", CV_WINDOW_AUTOSIZE);
-	cvMoveWindow("Dilation Demo", img.cols, 0);
+	cv::namedWindow(ErosionWindowName, CV_WINDOW_AUTOSIZE);
+	cv::namedWindow(DilationWindowName, CV_WINDOW_AUTOSIZE);
+	cvMoveWindow(DilationWindowName, img.cols, 0);
 
 	ErosionData erosionData;
 	erosionData.srcImg = img;
 	DilationData dilationData;
 	dilationData.srcImg = img;
 
-	cv::createTrackbar("Element:\n 0: Rect \n 1: Cross \n 2: Ellipse", "Erosion Demo", &(erosionData.erosionElem), MaxElem, Erosion, static_cast<void*>(&erosionData));
-	cv::createTrackbar("Kernel size:\n 2n +1", "Erosion Demo", &(erosionData.erosionSize), MaxKernelSize, Erosion, static_cast<void*>(&erosionData));
-	cv::createTrackbar("Element:\n 0: Rect \n 1: Cross \n 2: Ellipse", "Dilation Demo", &(dilationData.dilationElem), MaxElem, Dilation,static_cast<void*>(&dilationData));
-	cv::createTrackbar("Kernel size:\n 2n +1", "Dilation Demo", &(dilationData.dilationSize), MaxKernelSize, Dilation, static_cast<void*>(&dilationData));
+	// Element: 0: Rect  1: Cross  2: Ellipse
+	// Kernel size: 2n +1
+	cv::createTrackbar("Element : ", ErosionWindowName, &(erosionData.erosionElem), MaxElem, Erosion, static_cast<void*>(&erosionData));
+	cv::createTrackbar("Kernel : ", ErosionWindowName, &(erosionData.erosionSize), MaxKernelSize, Erosion, static_cast<void*>(&erosionData));
+
+	// Element:\n 0: Rect \n 1: Cross \n 2: Ellipse
+	// Kernel size : \n 2n + 1
+	cv::createTrackbar("Element : ", DilationWindowName, &(dilationData.dilationElem), MaxElem, Dilation,static_cast<void*>(&dilationData));
+	cv::createTrackbar("Kernel : ", DilationWindowName, &(dilationData.dilationSize), MaxKernelSize, Dilation, static_cast<void*>(&dilationData));
 
 	Erosion(0, static_cast<void*>(&erosionData));
 	Dilation(0, static_cast<void*>(&dilationData));
+
 	cv::waitKey(0);
 
 	return 0;
