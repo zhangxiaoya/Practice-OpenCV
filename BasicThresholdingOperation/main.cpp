@@ -49,7 +49,7 @@ void UpdateThresholdValue(int thresholdValue, void* data)
 
 int main(int argc, char* argv[])
 {
-	auto src = cv::imread("lena.png", 1);
+	auto src = cv::imread("..\\data\\lena.png", 1);
 	if (src.empty())
 	{
 		std::cout << "Read Image File Failed!" << std::endl;

@@ -151,7 +151,7 @@ void SnapShow(const cv::Mat& img, const char* winname)
 
 int main()
 {
-	auto sourceImage = cv::imread(".\\lena.png");
+	auto sourceImage = cv::imread("..\\data\\lena.png");
 	if (sourceImage.empty())
 	{
 		std::cout << "Read Image File Failed!" << std::endl;
