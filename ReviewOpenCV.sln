@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ROI", "ROI\ROI.vcxproj", "{34DFD057-1458-4E80-8ED6-B4C539F5FB08}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KNN", "KNN\KNN.vcxproj", "{8A309D42-E379-4058-A299-715761C174AE}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Filter", "Filter\Filter.vcxproj", "{D751FAE1-E7A5-4717-864C-64AE6A8E9934}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BasicThresholdingOperation", "BasicThresholdingOperation\BasicThresholdingOperation.vcxproj", "{6D81833B-4586-474B-AD5B-B49DBC18A181}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,14 @@ Global
 		{D751FAE1-E7A5-4717-864C-64AE6A8E9934}.Release|x64.Build.0 = Release|x64
 		{D751FAE1-E7A5-4717-864C-64AE6A8E9934}.Release|x86.ActiveCfg = Release|Win32
 		{D751FAE1-E7A5-4717-864C-64AE6A8E9934}.Release|x86.Build.0 = Release|Win32
+		{6D81833B-4586-474B-AD5B-B49DBC18A181}.Debug|x64.ActiveCfg = Debug|x64
+		{6D81833B-4586-474B-AD5B-B49DBC18A181}.Debug|x64.Build.0 = Debug|x64
+		{6D81833B-4586-474B-AD5B-B49DBC18A181}.Debug|x86.ActiveCfg = Debug|Win32
+		{6D81833B-4586-474B-AD5B-B49DBC18A181}.Debug|x86.Build.0 = Debug|Win32
+		{6D81833B-4586-474B-AD5B-B49DBC18A181}.Release|x64.ActiveCfg = Release|x64
+		{6D81833B-4586-474B-AD5B-B49DBC18A181}.Release|x64.Build.0 = Release|x64
+		{6D81833B-4586-474B-AD5B-B49DBC18A181}.Release|x86.ActiveCfg = Release|Win32
+		{6D81833B-4586-474B-AD5B-B49DBC18A181}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
