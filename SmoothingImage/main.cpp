@@ -3,6 +3,7 @@
 #include <imgproc/imgproc.hpp>
 #include <iostream>
 #include <contrib/contrib.hpp>
+#include "../Filter/Utils/PerformanceUtil.hpp"
 
 const int MAX_KERNEL_LENGTH = 31;
 
@@ -26,7 +27,7 @@ void DoBlurSmooth(const cv::Mat& img)
 
 	for (auto i = 1; i < MAX_KERNEL_LENGTH; i += 2)
 	{
-		blur(img, bluredImg, cv::Size(i, i), cv::Point(-1, -1));
+		CheckPerf(blur(img, bluredImg, cv::Size(i, i), cv::Point(-1, -1)), "blur") ;
 		sprintf_s(fullTitle, titleBufferSize, titleFormat.c_str(), i);
 		SnapShow(bluredImg, fullTitle, delay);
 	}
@@ -45,7 +46,7 @@ void DoGaussianBlur(const cv::Mat& img)
 	cv::Mat guassianBulredImg;
 	for (auto i = 1; i < MAX_KERNEL_LENGTH; i += 2)
 	{
-		GaussianBlur(img, guassianBulredImg, cv::Size(i, i), 0, 0);
+		CheckPerf(GaussianBlur(img, guassianBulredImg, cv::Size(i, i), 0, 0),"Gaussian Blur");
 		sprintf_s(fullTitle, titleBufferSize, titleFormat.c_str(), i);
 		SnapShow(guassianBulredImg, fullTitle, delay);
 	}
@@ -64,7 +65,7 @@ void DoMedianBlur(const cv::Mat& img)
 
 	for (auto i = 1; i < MAX_KERNEL_LENGTH; i += 2)
 	{
-		medianBlur(img, medianBluredImg, i);
+		CheckPerf(medianBlur(img, medianBluredImg, i),"Meidian Blur");
 		sprintf_s(fullTitle, titleBufferSize, titleFormat.c_str(), i);
 		SnapShow(medianBluredImg, fullTitle, delay);
 	}
@@ -83,7 +84,7 @@ void DoBilateralBlur(cv::Mat img)
 
 	for (auto i = 1; i < MAX_KERNEL_LENGTH; i += 2)
 	{
-		bilateralFilter(img, bilateralBlurImg, i,i*2,1/2);
+		CheckPerf(bilateralFilter(img, bilateralBlurImg, i,i*2,1/2), "Bilateral Blur");
 		sprintf_s(fullTitle, titleBufferSize, titleFormat.c_str(), i);
 		SnapShow(bilateralBlurImg, fullTitle, delay);
 	}
