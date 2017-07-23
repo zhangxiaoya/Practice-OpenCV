@@ -12,6 +12,9 @@
 # jpg file
 *.jpg
 
+# png file
+*.png
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
