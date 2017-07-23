@@ -11,14 +11,25 @@ void SnapShow(const cv::Mat& img, const char* winname)
 	cv::destroyWindow(winname);
 }
 
+void MorphologyOperation(const cv::Mat& img, cv::Mat& destImg, int op)
+{
+	auto element = getStructuringElement(cv::MORPH_RECT, cv::Size(3, 3), cv::Point(1, 1));
+	morphologyEx(img, destImg, op, element);
+}
+
 void DoCloseMorpholgyOperation(const cv::Mat& img)
 {
 	cv::Mat closedImg;
-	auto element = getStructuringElement(cv::MORPH_RECT, cv::Size(3, 3), cv::Point(1, 1));
-	morphologyEx(img, closedImg, CV_MOP_CLOSE, element);
+	MorphologyOperation(img, closedImg, CV_MOP_CLOSE);
 	SnapShow(closedImg, "Closed Image");
 }
 
+void DoOpenMorphologyOperation(const cv::Mat& img)
+{
+	cv::Mat openedImg;
+	MorphologyOperation(img, openedImg, CV_MOP_OPEN);
+	SnapShow(openedImg, "Opened Image");
+}
 int main(int argc, char* argv[])
 {
 	auto img = cv::imread("..\\data\\lena.png");
@@ -31,6 +42,8 @@ int main(int argc, char* argv[])
 	SnapShow(img, "Original Image");
 
 	DoCloseMorpholgyOperation(img);
+
+	DoOpenMorphologyOperation(img);
 
 	system("Pause");
 	return 0;
