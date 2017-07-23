@@ -34,8 +34,15 @@ void DoOpenMorphologyOperation(const cv::Mat& img)
 void DoGradientMorphologyOperation(const cv::Mat& img)
 {
 	cv::Mat gradientImg;
-	MorphologyOperation(img, gradientImg, CV_MOP_OPEN);
+	MorphologyOperation(img, gradientImg, CV_MOP_GRADIENT);
 	SnapShow(gradientImg, "Gradient Image");
+}
+
+void DoTopHatMorphologyOperation(const cv::Mat& img)
+{
+	cv::Mat tophatImg;
+	MorphologyOperation(img, tophatImg, CV_MOP_TOPHAT);
+	SnapShow(tophatImg, "Top-Hat Image");
 }
 
 int main(int argc, char* argv[])
@@ -54,6 +61,8 @@ int main(int argc, char* argv[])
 	DoOpenMorphologyOperation(img);
 
 	DoGradientMorphologyOperation(img);
+
+	DoTopHatMorphologyOperation(img);
 
 	system("Pause");
 	return 0;
