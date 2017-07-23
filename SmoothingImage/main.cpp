@@ -23,7 +23,7 @@ void DoBlurSmooth(cv::Mat& img)
 	const auto titleBufferSize = 100;
 	char fullTitle[titleBufferSize];
 
-	for (auto i = 1; i < MAX_KERNEL_LENGTH; ++i)
+	for (auto i = 1; i < MAX_KERNEL_LENGTH; i += 2)
 	{
 		blur(img, bluredImg, cv::Size(i, i), cv::Point(-1, -1));
 		sprintf_s(fullTitle, titleBufferSize, titleFormat.c_str(), i);
@@ -43,6 +43,19 @@ int main(int argc, char* argv[])
 	SnapShow(img, "Original Image");
 
 	DoBlurSmooth(img);
+
+	auto delay = 500;
+
+	std::string titleFormat = "Gaussion Blured image with kernel size %d";
+	const auto titleBufferSize = 100;
+	char fullTitle[titleBufferSize];
+	cv::Mat guassionBulredImg;
+	for (auto i = 1; i < MAX_KERNEL_LENGTH; i += 2)
+	{
+		GaussianBlur(img, guassionBulredImg, cv::Size(i, i), 0, 0);
+		sprintf_s(fullTitle, titleBufferSize, titleFormat.c_str(), i);
+		SnapShow(guassionBulredImg, fullTitle, delay);
+	}
 
 	cv::destroyAllWindows();
 	system("Pause");
