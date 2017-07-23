@@ -30,6 +30,14 @@ void DoOpenMorphologyOperation(const cv::Mat& img)
 	MorphologyOperation(img, openedImg, CV_MOP_OPEN);
 	SnapShow(openedImg, "Opened Image");
 }
+
+void DoGradientMorphologyOperation(const cv::Mat& img)
+{
+	cv::Mat gradientImg;
+	MorphologyOperation(img, gradientImg, CV_MOP_OPEN);
+	SnapShow(gradientImg, "Gradient Image");
+}
+
 int main(int argc, char* argv[])
 {
 	auto img = cv::imread("..\\data\\lena.png");
@@ -44,6 +52,8 @@ int main(int argc, char* argv[])
 	DoCloseMorpholgyOperation(img);
 
 	DoOpenMorphologyOperation(img);
+
+	DoGradientMorphologyOperation(img);
 
 	system("Pause");
 	return 0;
