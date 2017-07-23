@@ -45,6 +45,13 @@ void DoTopHatMorphologyOperation(const cv::Mat& img)
 	SnapShow(tophatImg, "Top-Hat Image");
 }
 
+void DoBlackHatMorphologyOperation(const cv::Mat& img)
+{
+	cv::Mat blackhatImg;
+	MorphologyOperation(img, blackhatImg, CV_MOP_BLACKHAT);
+	SnapShow(blackhatImg, "Black-Hat Image");
+}
+
 int main(int argc, char* argv[])
 {
 	auto img = cv::imread("..\\data\\lena.png");
@@ -63,6 +70,8 @@ int main(int argc, char* argv[])
 	DoGradientMorphologyOperation(img);
 
 	DoTopHatMorphologyOperation(img);
+
+	DoBlackHatMorphologyOperation(img);
 
 	system("Pause");
 	return 0;
