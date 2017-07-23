@@ -71,6 +71,25 @@ void DoMedianBlur(const cv::Mat& img)
 	std::cout << "Median Blur is Done!" << std::endl;
 }
 
+void DoBilateralBlur(cv::Mat img)
+{
+	cv::Mat bilateralBlurImg;
+	std::cout << "Bilateral Blur is doing ..." << std::endl;
+	auto delay = 500;
+
+	std::string titleFormat = "Bilateral Blured image with kernel size %d";
+	const auto titleBufferSize = 100;
+	char fullTitle[titleBufferSize];
+
+	for (auto i = 1; i < MAX_KERNEL_LENGTH; i += 2)
+	{
+		bilateralFilter(img, bilateralBlurImg, i,i*2,1/2);
+		sprintf_s(fullTitle, titleBufferSize, titleFormat.c_str(), i);
+		SnapShow(bilateralBlurImg, fullTitle, delay);
+	}
+	std::cout << "Bilateral Blur is Done!" << std::endl;
+}
+
 int main(int argc, char* argv[])
 {
 	auto img = cv::imread("..\\data\\lena.png");
@@ -87,6 +106,8 @@ int main(int argc, char* argv[])
 	DoGaussianBlur(img);
 
 	DoMedianBlur(img);
+
+	DoBilateralBlur(img);
 
 	cv::destroyAllWindows();
 	system("Pause");
