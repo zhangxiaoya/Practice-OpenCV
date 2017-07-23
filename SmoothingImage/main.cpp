@@ -52,6 +52,25 @@ void DoGaussianBlur(const cv::Mat& img)
 	std::cout << "Gaussian Blur is Done!" << std::endl;
 }
 
+void DoMedianBlur(const cv::Mat& img)
+{
+	cv::Mat medianBluredImg;
+	std::cout << "Median Blur is doing ..." << std::endl;
+	auto delay = 500;
+
+	std::string titleFormat = "Meidian Blured image with kernel size %d";
+	const auto titleBufferSize = 100;
+	char fullTitle[titleBufferSize];
+
+	for (auto i = 1; i < MAX_KERNEL_LENGTH; i += 2)
+	{
+		medianBlur(img, medianBluredImg, i);
+		sprintf_s(fullTitle, titleBufferSize, titleFormat.c_str(), i);
+		SnapShow(medianBluredImg, fullTitle, delay);
+	}
+	std::cout << "Median Blur is Done!" << std::endl;
+}
+
 int main(int argc, char* argv[])
 {
 	auto img = cv::imread("..\\data\\lena.png");
@@ -66,6 +85,8 @@ int main(int argc, char* argv[])
 	DoBlurSmooth(img);
 
 	DoGaussianBlur(img);
+
+	DoMedianBlur(img);
 
 	cv::destroyAllWindows();
 	system("Pause");
