@@ -15,6 +15,9 @@
 # png file
 *.png
 
+# Properties sheet
+*.props
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
