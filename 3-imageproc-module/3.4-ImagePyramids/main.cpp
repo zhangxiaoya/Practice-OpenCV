@@ -15,7 +15,7 @@ int main(int argc, char* argv[])
 	printf(" * [d] -> Zoom out            \n");
 	printf(" * [ESC] -> Close Program \n \n");
 
-	srcImg = cv::imread("..\\data\\lena.png");
+	srcImg = cv::imread("..\\..\\data\\lena.png");
 	if(srcImg.empty() == true)
 	{
 		std::cout << "Cannot open image file" << std::endl;
