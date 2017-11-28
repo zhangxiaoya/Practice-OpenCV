@@ -2,7 +2,6 @@
 #include <opencv2/core/core.hpp>
 #include <highgui.h>
 #include <contrib/contrib.hpp>
-#include <core/affine.hpp>
 
 int main(int argc, char* argv[])
 {
@@ -40,11 +39,13 @@ int main(int argc, char* argv[])
 		}
 		if(static_cast<char>(key) == 'u')
 		{
+			// maybe change default parameters
 			cv::pyrUp(tmpImg, dstImg, cv::Size(tmpImg.cols * 2, tmpImg.rows * 2));
 			printf("** Zoom In: Image * 2 \n");
 		}
 		else if(static_cast<char>(key) == 'd')
 		{
+			// maybe change default parameters
 			cv::pyrDown(tmpImg, dstImg, cv::Size(tmpImg.cols / 2, tmpImg.rows / 2));
 			printf("** Zoom Out: Image / 2 \n");
 		}
