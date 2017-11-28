@@ -31,6 +31,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.4-ImagePyramids", "3-imag
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.6-OwnLinearFilter", "3-imageproc-module\3.6-OwnLinearFilter\3.6-OwnLinearFilter.vcxproj", "{F074C5B4-1048-4210-87B3-F6DA583D99CA}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.7-AddingBorders", "3-imageproc-module\3.7-AddingBorders\3.7-AddingBorders.vcxproj", "{174BCA8B-4025-45E4-A0F8-DB3354444830}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -143,6 +145,14 @@ Global
 		{F074C5B4-1048-4210-87B3-F6DA583D99CA}.Release|x64.Build.0 = Release|x64
 		{F074C5B4-1048-4210-87B3-F6DA583D99CA}.Release|x86.ActiveCfg = Release|Win32
 		{F074C5B4-1048-4210-87B3-F6DA583D99CA}.Release|x86.Build.0 = Release|Win32
+		{174BCA8B-4025-45E4-A0F8-DB3354444830}.Debug|x64.ActiveCfg = Debug|x64
+		{174BCA8B-4025-45E4-A0F8-DB3354444830}.Debug|x64.Build.0 = Debug|x64
+		{174BCA8B-4025-45E4-A0F8-DB3354444830}.Debug|x86.ActiveCfg = Debug|Win32
+		{174BCA8B-4025-45E4-A0F8-DB3354444830}.Debug|x86.Build.0 = Debug|Win32
+		{174BCA8B-4025-45E4-A0F8-DB3354444830}.Release|x64.ActiveCfg = Release|x64
+		{174BCA8B-4025-45E4-A0F8-DB3354444830}.Release|x64.Build.0 = Release|x64
+		{174BCA8B-4025-45E4-A0F8-DB3354444830}.Release|x86.ActiveCfg = Release|Win32
+		{174BCA8B-4025-45E4-A0F8-DB3354444830}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -151,5 +161,6 @@ Global
 		{DAED49DD-1580-4E90-82A2-E6BCC75B0E88} = {3B4C596C-6B56-4E8A-9B24-D1DEA9197098}
 		{54849A58-2AB8-4950-8D4A-0C030271C2FC} = {3B4C596C-6B56-4E8A-9B24-D1DEA9197098}
 		{F074C5B4-1048-4210-87B3-F6DA583D99CA} = {3B4C596C-6B56-4E8A-9B24-D1DEA9197098}
+		{174BCA8B-4025-45E4-A0F8-DB3354444830} = {3B4C596C-6B56-4E8A-9B24-D1DEA9197098}
 	EndGlobalSection
 EndGlobal
