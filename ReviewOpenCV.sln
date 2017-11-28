@@ -27,6 +27,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.4-ImagePyramids", "3.4-Im
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3-imageproc-module", "3-imageproc-module", "{3B4C596C-6B56-4E8A-9B24-D1DEA9197098}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.5-BasicThresholding", "3-imageproc-module\3.5-BasicThresholding\3.5-BasicThresholding.vcxproj", "{DAED49DD-1580-4E90-82A2-E6BCC75B0E88}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -123,11 +125,20 @@ Global
 		{54849A58-2AB8-4950-8D4A-0C030271C2FC}.Release|x64.Build.0 = Release|x64
 		{54849A58-2AB8-4950-8D4A-0C030271C2FC}.Release|x86.ActiveCfg = Release|Win32
 		{54849A58-2AB8-4950-8D4A-0C030271C2FC}.Release|x86.Build.0 = Release|Win32
+		{DAED49DD-1580-4E90-82A2-E6BCC75B0E88}.Debug|x64.ActiveCfg = Debug|x64
+		{DAED49DD-1580-4E90-82A2-E6BCC75B0E88}.Debug|x64.Build.0 = Debug|x64
+		{DAED49DD-1580-4E90-82A2-E6BCC75B0E88}.Debug|x86.ActiveCfg = Debug|Win32
+		{DAED49DD-1580-4E90-82A2-E6BCC75B0E88}.Debug|x86.Build.0 = Debug|Win32
+		{DAED49DD-1580-4E90-82A2-E6BCC75B0E88}.Release|x64.ActiveCfg = Release|x64
+		{DAED49DD-1580-4E90-82A2-E6BCC75B0E88}.Release|x64.Build.0 = Release|x64
+		{DAED49DD-1580-4E90-82A2-E6BCC75B0E88}.Release|x86.ActiveCfg = Release|Win32
+		{DAED49DD-1580-4E90-82A2-E6BCC75B0E88}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{54849A58-2AB8-4950-8D4A-0C030271C2FC} = {3B4C596C-6B56-4E8A-9B24-D1DEA9197098}
+		{DAED49DD-1580-4E90-82A2-E6BCC75B0E88} = {3B4C596C-6B56-4E8A-9B24-D1DEA9197098}
 	EndGlobalSection
 EndGlobal
