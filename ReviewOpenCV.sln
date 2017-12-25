@@ -33,6 +33,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.6-OwnLinearFilter", "3-im
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3.7-AddingBorders", "3-imageproc-module\3.7-AddingBorders\3.7-AddingBorders.vcxproj", "{174BCA8B-4025-45E4-A0F8-DB3354444830}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6-feature2d-module", "6-feature2d-module", "{AFFD07F8-54AB-45E3-B39B-42ADE2EB110D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.1-FeatureDiscription", "6-feature2d-module\6.1-FeatureDiscription\6.1-FeatureDiscription.vcxproj", "{0B5C8EA6-07EC-4CD9-80F9-297C771DE664}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -153,6 +157,14 @@ Global
 		{174BCA8B-4025-45E4-A0F8-DB3354444830}.Release|x64.Build.0 = Release|x64
 		{174BCA8B-4025-45E4-A0F8-DB3354444830}.Release|x86.ActiveCfg = Release|Win32
 		{174BCA8B-4025-45E4-A0F8-DB3354444830}.Release|x86.Build.0 = Release|Win32
+		{0B5C8EA6-07EC-4CD9-80F9-297C771DE664}.Debug|x64.ActiveCfg = Debug|x64
+		{0B5C8EA6-07EC-4CD9-80F9-297C771DE664}.Debug|x64.Build.0 = Debug|x64
+		{0B5C8EA6-07EC-4CD9-80F9-297C771DE664}.Debug|x86.ActiveCfg = Debug|Win32
+		{0B5C8EA6-07EC-4CD9-80F9-297C771DE664}.Debug|x86.Build.0 = Debug|Win32
+		{0B5C8EA6-07EC-4CD9-80F9-297C771DE664}.Release|x64.ActiveCfg = Release|x64
+		{0B5C8EA6-07EC-4CD9-80F9-297C771DE664}.Release|x64.Build.0 = Release|x64
+		{0B5C8EA6-07EC-4CD9-80F9-297C771DE664}.Release|x86.ActiveCfg = Release|Win32
+		{0B5C8EA6-07EC-4CD9-80F9-297C771DE664}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -162,5 +174,6 @@ Global
 		{54849A58-2AB8-4950-8D4A-0C030271C2FC} = {3B4C596C-6B56-4E8A-9B24-D1DEA9197098}
 		{F074C5B4-1048-4210-87B3-F6DA583D99CA} = {3B4C596C-6B56-4E8A-9B24-D1DEA9197098}
 		{174BCA8B-4025-45E4-A0F8-DB3354444830} = {3B4C596C-6B56-4E8A-9B24-D1DEA9197098}
+		{0B5C8EA6-07EC-4CD9-80F9-297C771DE664} = {AFFD07F8-54AB-45E3-B39B-42ADE2EB110D}
 	EndGlobalSection
 EndGlobal
