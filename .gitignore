@@ -15,6 +15,8 @@
 # png file
 *.png
 
+build/
+
 # Properties sheet
 *.props
 
