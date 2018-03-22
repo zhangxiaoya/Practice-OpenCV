@@ -39,6 +39,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.1-FeatureDiscription", "6
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestORBFeature", "6-feature2d-module\TestORBFeature\TestORBFeature.vcxproj", "{2B94B6BA-AC4D-4FF6-BA47-A5B4D8BE1C17}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6.2-Harris-corner-detector", "6-feature2d-module\6.2-Harris-corner-detector\6.2-Harris-corner-detector.vcxproj", "{EFF00A69-7734-4AC8-B01C-878A331F7F2A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -175,6 +177,14 @@ Global
 		{2B94B6BA-AC4D-4FF6-BA47-A5B4D8BE1C17}.Release|x64.Build.0 = Release|x64
 		{2B94B6BA-AC4D-4FF6-BA47-A5B4D8BE1C17}.Release|x86.ActiveCfg = Release|Win32
 		{2B94B6BA-AC4D-4FF6-BA47-A5B4D8BE1C17}.Release|x86.Build.0 = Release|Win32
+		{EFF00A69-7734-4AC8-B01C-878A331F7F2A}.Debug|x64.ActiveCfg = Debug|x64
+		{EFF00A69-7734-4AC8-B01C-878A331F7F2A}.Debug|x64.Build.0 = Debug|x64
+		{EFF00A69-7734-4AC8-B01C-878A331F7F2A}.Debug|x86.ActiveCfg = Debug|Win32
+		{EFF00A69-7734-4AC8-B01C-878A331F7F2A}.Debug|x86.Build.0 = Debug|Win32
+		{EFF00A69-7734-4AC8-B01C-878A331F7F2A}.Release|x64.ActiveCfg = Release|x64
+		{EFF00A69-7734-4AC8-B01C-878A331F7F2A}.Release|x64.Build.0 = Release|x64
+		{EFF00A69-7734-4AC8-B01C-878A331F7F2A}.Release|x86.ActiveCfg = Release|Win32
+		{EFF00A69-7734-4AC8-B01C-878A331F7F2A}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -186,5 +196,6 @@ Global
 		{174BCA8B-4025-45E4-A0F8-DB3354444830} = {3B4C596C-6B56-4E8A-9B24-D1DEA9197098}
 		{0B5C8EA6-07EC-4CD9-80F9-297C771DE664} = {AFFD07F8-54AB-45E3-B39B-42ADE2EB110D}
 		{2B94B6BA-AC4D-4FF6-BA47-A5B4D8BE1C17} = {AFFD07F8-54AB-45E3-B39B-42ADE2EB110D}
+		{EFF00A69-7734-4AC8-B01C-878A331F7F2A} = {AFFD07F8-54AB-45E3-B39B-42ADE2EB110D}
 	EndGlobalSection
 EndGlobal
