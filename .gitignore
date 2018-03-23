@@ -16,6 +16,7 @@
 *.png
 
 build/
+cmake-build-debug/
 
 # Properties sheet
 *.props
