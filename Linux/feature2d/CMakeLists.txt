@@ -9,6 +9,9 @@ find_package(OpenCV REQUIRED)
 
 include_directories(${OpenCV_INCLUDE_DIR})
 
-add_executable(feature2d HarrisCorners.cpp)
+add_executable(HarrisCorner HarrisCorners.cpp)
 
-target_link_libraries(feature2d ${OpenCV_LIBS})
+add_executable(ShiTomasi ShiTomasi.cpp)
+
+target_link_libraries(HarrisCorner ${OpenCV_LIBS})
+target_link_libraries(ShiTomasi ${OpenCV_LIBS})
